@@ -8,6 +8,7 @@ const User = require('../models/User');
 const UserController = {
   register: async (req, res, next) => {
     const { email, password: pass, name } = req.body;
+    console.log(email, pass, name);
     // Check if user exists
     const user = await User.findOne({ email });
     console.log('user:', user);
@@ -33,6 +34,7 @@ const UserController = {
   },
   login: async (req, res, next) => {
     const { email, password } = req.body;
+    console.log(email, password);
     if (!email) {
       return res.status(400).json({ error: 'Email is required' });
     }
@@ -42,7 +44,7 @@ const UserController = {
 
     try {
       const user = await User.findOne({ email });
-
+      
       if (!user) {
         return res.status(400).json({ error: 'Invalid email' });
       }

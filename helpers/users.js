@@ -70,7 +70,7 @@ module.exports = {
       const { id } = await jwt.verify(token, '21km2b82329bjjsaz');
 
       if (!id) {
-        return res.status(401).json({ error: 'Failed to Authenticate' });
+        return res.status(401).json({ error: 'Failed to Authenticate. Please logout and try again' });
       }
 
       const user = await User.findById(id);
@@ -78,7 +78,7 @@ module.exports = {
       req.user = user;
       next(); // pass the execution off to whatever request the client intended
     } catch (error) {
-      res.status(403).json({ error: 'Failed to Authenticate' });
+      res.status(403).json({ error: 'Failed to Authenticate. Please logout and try again' });
     }
   },
 };
